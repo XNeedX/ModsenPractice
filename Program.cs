@@ -8,20 +8,17 @@ namespace Modsen
         {
             int size;
             bool isValidInput = false;
+            string? input;
 
             do
             {
                 Console.WriteLine("Введите размер массива: ");
-                string input = Console.ReadLine();
+                input = Console.ReadLine();
 
                 if (int.TryParse(input, out size) && size > 0)
-                {
                     isValidInput = true;
-                }
                 else
-                {
                     Console.WriteLine("Ошибка: введите положительное целое число.");
-                }
             } while (!isValidInput);
 
             int[] array = new int[size];
@@ -30,13 +27,14 @@ namespace Modsen
 
             for (int i = 0; i < size; i++)
             {
-                array[i] = random.Next(1, 101); // Генерация случайных чисел от 1 до 100
+                array[i] = random.Next(1, 101);
             }
-
+                
             Console.WriteLine("Сгенерированный массив: ");
             ArrayMethods.PrintArray(array);
 
             bool exit = false;
+            string? choice;
 
             while (!exit)
             {
@@ -54,7 +52,7 @@ namespace Modsen
                 Console.WriteLine("11. Вывести массив");
                 Console.WriteLine("12. Выйти");
 
-                string choice = Console.ReadLine();
+                choice = Console.ReadLine();
 
                 switch (choice)
                 {
@@ -67,21 +65,18 @@ namespace Modsen
                     case "3":
                         ArrayMethods.MoveEvenToFront(array);
                         Console.WriteLine("Массив после перемещения четных элементов в начало:");
-                        ArrayMethods.PrintArray(array);
                         break;
                     case "4":
-                        int sum = ArrayMethods.GetSumArray(array);
-                        Console.WriteLine("Сумма элементов массива: " + sum);
+                        Console.WriteLine("Сумма элементов массива: " + ArrayMethods.GetSumArray(array));
                         break;
                     case "5":
-                        int max = ArrayMethods.GetMaxValue(array);
-                        Console.WriteLine("Максимальное значение: " + max);
+                        Console.WriteLine("Максимальное значение: " + ArrayMethods.GetMaxValue(array));
                         break;
                     case "6":
                         try
                         {
-                            int secondMax = ArrayMethods.GetSecondMaxValue(array);
-                            Console.WriteLine("Второе максимальное значение: " + secondMax);
+                            Console.WriteLine("Второе максимальное значение: " 
+                                + ArrayMethods.GetSecondMaxValue(array));
                         }
                         catch (ArgumentException e)
                         {
@@ -89,29 +84,23 @@ namespace Modsen
                         }
                         break;
                     case "7":
-                        int uniqueCount = ArrayMethods.FindCountOfUnique(array);
-                        Console.WriteLine("Количество уникальных элементов: " + uniqueCount);
+                        Console.WriteLine("Количество уникальных элементов: " + ArrayMethods.FindCountOfUnique(array));
                         break;
                     case "8":
                         int firstUnique = ArrayMethods.GetFirstUnique(array);
-                        if (firstUnique != 0)
-                        {
+
+                        if (firstUnique != -1)
                             Console.WriteLine("Первый уникальный элемент: " + firstUnique);
-                        }
                         else
-                        {
                             Console.WriteLine("Уникальные элементы отсутствуют.");
-                        }
                         break;
                     case "9":
                         ArrayMethods.SwapMaxAndMin(array);
                         Console.WriteLine("Массив после замены максимального и минимального элементов:");
-                        ArrayMethods.PrintArray(array);
                         break;
                     case "10":
                         ArrayMethods.SwapFirstAndLast(array);
                         Console.WriteLine("Массив после замены первого и последнего элементов:");
-                        ArrayMethods.PrintArray(array);
                         break;
                     case "11":
                         ArrayMethods.PrintArray(array);

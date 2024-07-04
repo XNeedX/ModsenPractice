@@ -13,32 +13,32 @@ public static class ArrayMethods
     public static int GetSumArray(int[] array)
     {
         int sum = 0;
+
         foreach (int number in array)
         {
             sum += number;
         }
+
         return sum;
     }
 
     public static int GetMaxValue(int[] array)
     {
         int max = array[0];
+
         foreach (int number in array)
         {
             if (number > max)
-            {
                 max = number;
-            }
         }
+
         return max;
     }
 
     public static int GetSecondMaxValue(int[] array)
     {
         if (array.Length < 2)
-        {
             throw new ArgumentException("Массив должен содержать хотя бы два элемента.");
-        }
 
         int max = int.MinValue;
         int secondMax = int.MinValue;
@@ -57,16 +57,14 @@ public static class ArrayMethods
         }
 
         if (secondMax == int.MinValue)
-        {
             throw new ArgumentException("Все элементы массива одинаковы.");
-        }
 
         return secondMax;
     }
 
     public static int FindCountOfUnique(int[] array)
     {
-        Dictionary<int, int> elements = new Dictionary<int, int>();
+        Dictionary<int, int> elements = new ();
 
         foreach (int element in array)
         {
@@ -80,29 +78,23 @@ public static class ArrayMethods
 
     public static int GetFirstUnique(int[] array)
     {
-        Dictionary<int, int> elements = new Dictionary<int, int>();
+        Dictionary<int, int> elements = new ();
 
         foreach (int element in array)
         {
             if (elements.ContainsKey(element))
-            {
                 elements[element]++;
-            }
             else
-            {
                 elements.Add(element, 1);
-            }
         }
 
         foreach (int element in array)
         {
             if (elements[element] == 1)
-            {
                 return element; 
-            }
         }
 
-        return 0; 
+        return -1; 
     }
 
     public static void SwapMaxAndMin(int[] array)
@@ -112,23 +104,23 @@ public static class ArrayMethods
         for(int i = 0; i <  array.Length; i++)
         {
             if (array[i] > array[indexOfMax])
-            {
                 indexOfMax = i;
-            }
             if (array[i] < array[indexOfMin])
-            {
                 indexOfMin = i;
-            }
         }
 
         (array[indexOfMax], array[indexOfMin])
             = (array[indexOfMin], array[indexOfMax]);
+
+        PrintArray(array);
     }
 
     public static void SwapFirstAndLast(int[] array)
     {
         (array[0], array[array.Length - 1]) 
             = (array[array.Length - 1], array[0]);
+
+        PrintArray(array);
     }
 
     public static void SortByAscending(int[] array)  //В данной функции была реализована сортировка вставками
@@ -178,17 +170,14 @@ public static class ArrayMethods
 
         while (left < right)
         {
-            // Если левый элемент четный, просто продвигаемся вправо
             if (array[left] % 2 == 0)
             {
                 left++;
             }
-            // Если правый элемент нечетный, просто продвигаемся влево
             else if (array[right] % 2 != 0)
             {
                 right--;
             }
-            // Если левый элемент нечетный и правый элемент четный, меняем их местами
             else
             {
                 (array[left], array[right]) = (array[right], array[left]);
@@ -196,5 +185,7 @@ public static class ArrayMethods
                 right--;
             }
         }
+
+        PrintArray(array);
     }
 }
